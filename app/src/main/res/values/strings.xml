@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Vikash</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="spacer"> </string>
+    <string name="desc"> </string>
+    <string name="car">Register Car</string>
+    <string name="calendar">Calendar</string>
+    <string name="compass">Compass Map</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
