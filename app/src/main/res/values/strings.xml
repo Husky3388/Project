@@ -8,4 +8,13 @@
     <string name="calendar">Calendar</string>
     <string name="compass">Compass Map</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="producer">Producers</string>
+    <string name="producerNames">Alexzander Avila\nNicholas Jones\nJason Thai\n</string>
+    <string name="specialThanks">Special Thanks</string>
+    <string name="specialThanksNames">Gordon Griesel\nVikash A. Lakhani\n</string>
+    <string name="aboutUs">This software is our project for Advance Software Engineering.\n
+        It was meant to solve Vikash\'s problem of renting a car and having to refuel it before returning it.\n
+        We hope you enjoy our software and we apologize for any bugs that are found.</string>
+
 </resources>

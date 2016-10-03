@@ -1,5 +1,6 @@
 package com.example.jasonthai.project;
 
+import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
@@ -48,12 +49,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-        //LatLng location = new LatLng(MainActivity.mylatlon[0], MainActivity.mylatlon[1]);
-        //mMap.addMarker(new MarkerOptions().position(location).title("Marker in Location"));
-        //mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+        //LatLng sydney = new LatLng(-34, 151);
+        //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng location = new LatLng(MainActivity.mylatlon[0], MainActivity.mylatlon[1]);
+        mMap.addMarker(new MarkerOptions().position(location).title("Marker in Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 
     class MyLocationListener implements android.location.LocationListener {

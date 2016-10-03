@@ -39,11 +39,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private LocationListener mlocListener;
     public double glat = 0.0, glon = 0.0, galtitude = 0.0;
     int locationReady = 0;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         addListenerOnButton3();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -64,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         .setAction("Action", null).show();
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     public void onClick(View v) {
@@ -88,6 +81,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if (id == R.id.action_AboutUs) {
+            Intent intent = new Intent(this, AboutUsActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -115,9 +113,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         mlocListener = new MyLocationListener();
 
-        //ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+        //mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
         if (DEBUG) locationReady = 1;
         if (DEBUG) glat = 35.4444;
         if (DEBUG) glon = -119.4444;
@@ -131,12 +127,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         location.setOnClickListener(new OnClickListener() {
             //@Override
             public void onClick(View arg0) {
-                //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
-                //startActivity(browserIntent);
-                //if (Csub1Activity.nList >= Csub1Activity.MAX_LIST) {
-                //    Toast.makeText(getBaseContext(), "Max items reached.", Toast.LENGTH_SHORT).show();
-                //    return;
-                //}
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), MapsActivity.class);
                 startActivity(intent);
@@ -179,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 
                 } else {
                     // permission denied, boo! Disable the
