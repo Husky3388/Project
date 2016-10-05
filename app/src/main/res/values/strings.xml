@@ -19,4 +19,21 @@
 
     <string name="intro">Welcome to Vikash\'s Gas Station Finder App</string>
 
+    <string name="enter_car_info">Enter Car Info</string>
+    <string name="make">Make</string>
+    <string name="model">Model</string>
+    <string name="year">Year</string>
+    <string name="color">Color</string>
+    <string name="lic_plate">Lic. Plate</string>
+    <string name="mileage">Mileage</string>
+    <string name="makehint">Ford</string>
+    <string name="modelhint">Focus</string>
+    <string name="yearhint">2016</string>
+    <string name="colorhint">Silver</string>
+    <string name="lichint">######</string>
+    <string name="milehint">52000</string>
+    <string name="button_save">Save</string>
+    <string name="new_car">New Car</string>
+    <string name="edit_delete_car">Edit/Delete Car</string>
+
 </resources>

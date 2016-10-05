@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     public void onClick1(View v) {
-        //Intent intent = new Intent(this, ListBuildingsActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, EditCarInfoActivity.class);
+        startActivity(intent);
     }
 
     public void onClick2(View v) {
