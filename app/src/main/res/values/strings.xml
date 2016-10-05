@@ -17,4 +17,6 @@
         It was meant to solve Vikash\'s problem of renting a car and having to refuel it before returning it.\n
         We hope you enjoy our software and we apologize for any bugs that are found.</string>
 
+    <string name="intro">Welcome to Vikash\'s Gas Station Finder App</string>
+
 </resources>
