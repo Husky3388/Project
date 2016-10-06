@@ -98,8 +98,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     }
 
     public void onClick2(View v) {
-        //Intent intent = new Intent(this, ListBuildingsActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, CalendarActivity.class);
+        startActivity(intent);
     }
 
     public void onClick3(View v) {

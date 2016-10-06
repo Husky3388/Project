@@ -62,8 +62,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddNewCarActivity"></activity>
-        <activity android:name=".EditCarInfoActivity"></activity>
+        <activity android:name=".AddNewCarActivity" />
+        <activity android:name=".EditCarInfoActivity" />
+        <activity android:name=".CalendarActivity"></activity>
     </application>
 
 </manifest>
