@@ -45,7 +45,12 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jasonthai.project.MainActivity"/>
+        </activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -54,7 +59,13 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".AboutUsActivity" />
+        <activity android:name=".AboutUsActivity"
+            android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.jasonthai.project.MainActivity"/>
+        </activity>
+
         <activity android:name=".IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,9 +73,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddNewCarActivity" />
-        <activity android:name=".EditCarInfoActivity" />
-        <activity android:name=".CalendarActivity"></activity>
+
+        <activity android:name=".AddNewCarActivity"
+            android:parentActivityName=".EditCarInfoActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jasonthai.project.EditCarInfoActivity"/>
+        </activity>
+
+        <activity android:name=".EditCarInfoActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jasonthai.project.MainActivity"/>
+        </activity>
+
+        <activity android:name=".CalendarActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.jasonthai.project.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>
