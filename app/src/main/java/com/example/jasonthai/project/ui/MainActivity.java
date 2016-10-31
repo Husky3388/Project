@@ -1,7 +1,6 @@
-package com.example.jasonthai.project;
+package com.example.jasonthai.project.ui;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -12,25 +11,25 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.Activity;
 
 import android.view.View.OnClickListener;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
+import com.example.jasonthai.project.Manifest;
+import com.example.jasonthai.project.R;
+import com.example.jasonthai.project.shared.Utils;
+import com.example.jasonthai.project.service.UtilityService;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
+public class MainActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
+
+    private static final int PERMISSION_REQ = 0;
+
     public static double[] mylatlon;
     TextView location;
     //
@@ -45,7 +44,25 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        // Check fine location permission has been granted
+        if (!Utils.checkFineLocationPermission(this)) {
+            // See if user has denied permission in the past
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Show a simple snackbar explaining the request instead
+                //showPermissionSnackbar();
+            } else {
+                // Otherwise request permission from user
+                if (savedInstanceState == null) {
+                    requestFineLocationPermission();
+                }
+            }
+        } else {
+            // Otherwise permission is granted (which is always the case on pre-M devices)
+            fineLocationPermissionGranted();
+        }
+
+        //ActivityCompat.requestPermissions(this,new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
         addListenerOnButton3();
 
@@ -60,6 +77,28 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         .setAction("Action", null).show();
             }
         });
+
+        FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.fab2);
+        fab2.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(
+                        view, R.string.permission_explanation, Snackbar.LENGTH_LONG)
+                        .setAction(R.string.permission_explanation_action, new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                requestFineLocationPermission();
+                            }
+                        })
+                        .show();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UtilityService.requestLocation(this);
     }
 
     public void onClick(View v) {
@@ -109,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     void addListenerOnButton3() {
         location = (TextView) findViewById(R.id.compassMap);
-        location.setEnabled(false);
+        location.setEnabled(true);
         mlocManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         mlocListener = new MyLocationListener();
 
@@ -124,12 +163,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         MainActivity.mylatlon[0] = glat;
         MainActivity.mylatlon[1] = glon;
 
-        location.setOnClickListener(new OnClickListener() {
+        //location.setOnClickListener(new OnClickListener() {
             //@Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent();
-                intent.setClass(getApplicationContext(), MapsActivity.class);
-                startActivity(intent);
+        //    public void onClick(View arg0) {
+        //        Intent intent = new Intent();
+        //        intent.setClass(getApplicationContext(), MapsActivity.class);
+        //        startActivity(intent);
+        //    }
+        //});
+
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Search for gas stations nearby
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=gas stations");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
             }
         });
     }
@@ -163,28 +213,72 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         }
     }
 
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
+    //public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    //    switch (requestCode) {
+    //        case 1: {
                 // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
+    //            if (grantResults.length > 0
+    //                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+    //                mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, mlocListener);
 
-                } else {
+    //            } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                }
-                return;
-            }
+    //            }
+    //            return;
+    //        }
             // other 'case' lines to check for other
             // permissions this app might request
-        }
-    }
+    //    }
+    //}
     public boolean checkLocationPermission()
     {
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = this.checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    /**
+     * Permissions request result callback
+     */
+    @Override
+    public void onRequestPermissionsResult(
+            int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQ:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    fineLocationPermissionGranted();
+                }
+        }
+    }
+    /**
+     * Request the fine location permission from the user
+     */
+    private void requestFineLocationPermission() {
+        ActivityCompat.requestPermissions(this,
+                new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQ);
+    }
+
+    /**
+     * Run when fine location permission has been granted
+     */
+    private void fineLocationPermissionGranted() {
+        UtilityService.addGeofences(this);
+        UtilityService.requestLocation(this);
+    }
+
+    /**
+     * Show a permission explanation snackbar
+     */
+    private void showPermissionSnackbar() {
+        Snackbar.make(
+                findViewById(R.id.container), R.string.permission_explanation, Snackbar.LENGTH_LONG)
+                .setAction(R.string.permission_explanation_action, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        requestFineLocationPermission();
+                    }
+                })
+                .show();
     }
 }

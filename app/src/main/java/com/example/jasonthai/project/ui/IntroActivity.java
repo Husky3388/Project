@@ -1,4 +1,4 @@
-package com.example.jasonthai.project;
+package com.example.jasonthai.project.ui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.widget.TextView;
+
+import com.example.jasonthai.project.R;
 
 public class IntroActivity extends AppCompatActivity {
 

@@ -1,16 +1,14 @@
-package com.example.jasonthai.project;
+package com.example.jasonthai.project.ui;
 
-import android.content.Context;
 import android.location.Location;
 import android.location.LocationManager;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.jasonthai.project.R;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;

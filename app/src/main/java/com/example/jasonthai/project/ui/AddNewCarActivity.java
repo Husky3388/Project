@@ -1,4 +1,4 @@
-package com.example.jasonthai.project;
+package com.example.jasonthai.project.ui;
 
 import android.content.Context;
 import android.os.Environment;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import com.example.jasonthai.project.R;
 
 import java.io.FileOutputStream;
 

@@ -1,4 +1,4 @@
-package com.example.jasonthai.project;
+package com.example.jasonthai.project.ui;
 
 import android.app.ActionBar;
 import android.content.Intent;
@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.CalendarView;
 import android.widget.Toast;
+
+import com.example.jasonthai.project.R;
 
 public class CalendarActivity extends AppCompatActivity {
 

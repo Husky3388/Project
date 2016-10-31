@@ -36,4 +36,7 @@
     <string name="new_car">New Car</string>
     <string name="edit_delete_car">Edit/Delete Car</string>
 
+    <string name="permission_explanation">Allow this app to use your location to show distance to attractions?</string>
+    <string name="permission_explanation_action">Let\'s do it!</string>
+
 </resources>
