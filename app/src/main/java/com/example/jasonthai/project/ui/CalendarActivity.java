@@ -16,7 +16,7 @@ import com.example.jasonthai.project.R;
 
 public class CalendarActivity extends AppCompatActivity {
 
-    /*CalendarView calendar;
+    CalendarView calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,8 @@ public class CalendarActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), (month+1) + "/" + dayOfMonth + "/" + year, Toast.LENGTH_LONG).show();
             }
         });
-    }*/
-    Calendar cal = Calendar.getInstance();
+    }
+    /*Calendar cal = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +52,7 @@ public class CalendarActivity extends AppCompatActivity {
         intent.putExtra("rrule", "FREQ=DAILY");
         intent.putExtra("endTime", cal.getTimeInMillis() + 60 * 60 * 1000);
         intent.putExtra("title", "A Test Event from android app");
-        startActivity(intent);*/
+        startActivity(intent);
 
         Intent calIntent = new Intent(Intent.ACTION_INSERT);
         calIntent.setType("vnd.android.cursor.item/event");
@@ -68,7 +68,7 @@ public class CalendarActivity extends AppCompatActivity {
                 calDate.getTimeInMillis());
 
         startActivity(calIntent);
-    };
+    };*/
 
 
 

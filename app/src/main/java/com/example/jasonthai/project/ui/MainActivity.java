@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements ActivityCompat.On
             @Override
             public void onClick(View v) {
                 // Search for gas stations nearby
-                Uri gmmIntentUri = Uri.parse("geo:0,0?q=gas stations");
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=gas stations near me");
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
                 startActivity(mapIntent);

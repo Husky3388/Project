@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.xyztouristattractions.service;
+package com.example.jasonthai.project.service;
 
 import android.content.Context;
 import android.content.Intent;
