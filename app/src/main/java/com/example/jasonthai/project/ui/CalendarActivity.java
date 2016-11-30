@@ -26,6 +26,21 @@ public class CalendarActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(2016, 12, 19, 7, 30);
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(2016, 12, 19, 8, 30);
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                .putExtra(CalendarContract.Events.TITLE, "Yoga")
+                .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+                .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
+        startActivity(intent);
+
         calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
         {
@@ -36,6 +51,7 @@ public class CalendarActivity extends AppCompatActivity {
             }
         });
     }
+
     /*Calendar cal = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +61,7 @@ public class CalendarActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        /*Intent intent = new Intent(Intent.ACTION_EDIT);
+        Intent intent = new Intent(Intent.ACTION_EDIT);
         intent.setType("vnd.android.cursor.item/event");
         intent.putExtra("beginTime", cal.getTimeInMillis());
         intent.putExtra("allDay", false);
@@ -68,6 +84,21 @@ public class CalendarActivity extends AppCompatActivity {
                 calDate.getTimeInMillis());
 
         startActivity(calIntent);
+
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(2016, 12, 19, 7, 30);
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(2016, 12, 19, 8, 30);
+        Intent intent = new Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
+                .putExtra(CalendarContract.Events.TITLE, "Yoga")
+                .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+                .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
+        startActivity(intent);
     };*/
 
 
